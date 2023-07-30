@@ -1,12 +1,20 @@
 
+// jest.spyOn(Date, 'now').mockImplementation(() => {
+//     return (new Date('2011-01-02')).getTime()
+// })
+
+const fakeTimestamp = 1627673696000; 
+
+Date.now = jest.fn(() => fakeTimestamp);
+
 const BirthdayTuple = require('./birthday-tuple')
 const HardCodedBirthday = require('../data/hardcoded-birthday')
 
 describe('BirthdayTuple', () => {
 
-    afterEach(() => {
-        jest.useRealTimers()
-    })
+    // afterEach(() => {
+    //     jest.useRealTimers()
+    // })
 
     it('handles birthday', () => {
 
@@ -20,6 +28,9 @@ describe('BirthdayTuple', () => {
         //         )
         //             .getTime()
         //     );
+
+
+      
 
         const isBirthday = BirthdayTuple();
 
@@ -37,6 +48,7 @@ describe('BirthdayTuple', () => {
 
         // Clean up the mock after the test
         // dateNowSpy.mockRestore();
+
     })
 
 
@@ -49,16 +61,17 @@ describe('BirthdayTuple', () => {
         //         HardCodedBirthday.day + 1
         //     ));
 
-        // jest
-        // .useFakeTimers()
-        // .setSystemTime(
-        //     new Date(
-        //         HardCodedBirthday.year,
-        //         HardCodedBirthday.month + 1,
-        //         HardCodedBirthday.day + 1 + 1
-        //     )
-        //         .getTime()
-        // );
+        jest.useFakeTimers()
+        jest.setSystemTime(
+            new Date(
+                // HardCodedBirthday.year,
+                // HardCodedBirthday.month + 1,
+                // HardCodedBirthday.day + 1 + 1
+
+                '2011-02-03'
+            )
+                .getTime()
+        );
 
 
         const isBirthday = BirthdayTuple();
